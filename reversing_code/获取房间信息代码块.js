@@ -1,3 +1,4 @@
+//函数实际实现
 function (e, t, r) {
   "use strict";
   const i = global.logger.matchMgr,
@@ -13,21 +14,18 @@ function (e, t, r) {
     static enterTeam(e) {
       i.trace(`${m}call - enterTeam, params: ${JSON.stringify(e)}`);
       let t = new a();
-      console.warn("MT_ENTER_TEAM_REQ",o.MessageType.MT_ENTER_TEAM_REQ);
-      console.warn("GameType.CSGO:",n.GameType.CSGO);
-      console.warn("MATCH_MODE_RANK_MATCH",o.CSGOMatchMode.MATCH_MODE_RANK_MATCH);
-      (t.type = o.MessageType.MT_ENTER_TEAM_REQ),
-        (t.source = u.user_id()),
-        (t.attach_id1 = n.GameType.CSGO);
-      let r = new o.EnterTeamReq(e);
-      r.match_mode = o.CSGOMatchMode.MATCH_MODE_RANK_MATCH;
-      let p = s.serializeBinary(r),
-        c = a.head_size + p.length;
+      (t.type = o.MessageType.MT_ENTER_TEAM_REQ),//位于项目中的wanmei_tcp/wanmei_client/protocol/constants.py中RoomProtocol类下的MessageType.MT_ENTER_TEAM_REQ
+        (t.source = u.user_id()),//实际上就是用户的steam64id,在项目中的wanmei_tcp/wanmei_client/protocol/message.py中LoginInfo类有定义user_id
+        (t.attach_id1 = n.GameType.CSGO);//位于项目中的wanmei_tcp/wanmei_client/protocol/constants.py中RoomProtocol类下的GameType.CSGO
+      let r = new o.EnterTeamReq(e);//项目中的reversing_code/enterTeam序列化相关.js中有定义
+      r.match_mode = o.CSGOMatchMode.MATCH_MODE_RANK_MATCH;//位于项目中的wanmei_tcp/wanmei_client/protocol/constants.py中RoomProtocol类下的CSGOMatchMode.MATCH_MODE_RANK_MATCH
+      let p = s.serializeBinary(r),//位于项目中的reversing_code/enterTeam序列化相关.js中
+        c = a.head_size + p.length;//a.head_size即项目中的wanmei_tcp/wanmei_client/protocol/message.py中Message类下的head_size，被设定为常量48
       t.length = c;
-      let l = t.serialize();
-      u.send_message(l, p);
+      let l = t.serialize();//位于项目中的wanmei_tcp/wanmei_client/protocol/message.py中Message类下的serialize方法
+      u.send_message(l, p);//项目中的reversing_code/gate tcp服务器连接相关.js中
     }
-//前置代码
+//ipc通信部分
 function (e, t, r) {
   "use strict";
   const { ipcMain: i } = r(2),
@@ -59,11 +57,10 @@ function (e, t, r) {
             l.enterTeam(t);
         })
 
-//调用代码
+//调用函数的代码
 const a = e.inputValue.replace("0", ""),
 s = yield v["default"].send(
 R.a.ReqType.MT_ENTER_TEAM_REQ,
 { team_id: a },
 R.a.ResType.MT_ENTER_TEAM_RES,
 );
-fs.appendFileSync("C:\\wm.log", `MT_ENTER_TEAM_RES result: ${JSON.stringify(s)}\n`);

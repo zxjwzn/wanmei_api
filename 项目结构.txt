@@ -8,7 +8,7 @@ wanmei_tcp/
 │   │
 │   ├── protocol/                # 协议相关
 │   │   ├── __init__.py
-│   │   ├── header.py            # 消息头部
+│   │   ├── message.py            # 消息协议类
 │   │   └── constants.py         # 协议常量
 │   │
 │   ├── api/                     # API接口
