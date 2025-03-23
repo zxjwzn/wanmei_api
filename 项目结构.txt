@@ -1,0 +1,35 @@
+wanmei_tcp/
+├── wanmei_client/               # 包主目录
+│   ├── __init__.py              # 导出主要接口
+│   ├── core/                    # 核心功能
+│   │   ├── __init__.py
+│   │   ├── tcp_client.py        # TCP连接实现
+│   │   └── session.py           # 会话管理
+│   │
+│   ├── protocol/                # 协议相关
+│   │   ├── __init__.py
+│   │   ├── header.py            # 消息头部
+│   │   └── constants.py         # 协议常量
+│   │
+│   ├── api/                     # API接口
+│   │   ├── __init__.py
+│   │   ├── client.py            # 客户端API接口
+│   │   ├── ladder.py            # 天梯API
+│   │   └── team.py              # 队伍API
+│   │
+│   ├── cache/                   # 缓存功能
+│   │   ├── __init__.py
+│   │   └── login_cache.py       # 登录信息缓存
+│   │
+│   └── utils/                   # 工具函数
+│       ├── __init__.py
+│       ├── binary.py            # 二进制处理
+│       └── serialization.py     # 序列化工具
+│
+├── examples/                    # 使用示例
+│   ├── simple_login.py
+│   └── api_usage.py
+│
+└── tests/                       # 测试代码
+    ├── __init__.py
+    └── test_client.py
