@@ -5,7 +5,7 @@ function (e, t, r) {
     n = r(10),
     o = r(11),
     u = r(8),
-    p = r(97),//login_info构造
+    p = r(97),//项目路径wanmei_client/protocol/message.py中LoginInfo类已有对应python实现
     c = r(13),
     m = r(77),
     l = r(138),
@@ -32,12 +32,12 @@ function (e, t, r) {
         p.user_id = e.localSteamId64;
       }
       p.login_token = e;
-      let u = m.getConfig().login_server,
+      let u = m.getConfig().login_server,// m.getConfig()获取到的转换为json格式内容可见config.json
         c = m.getConfig().login_port;
       p.notify_loginState(l.LoginState.Connecting),
       
         d.trace(
-          `connect login server,ip=${u},port=${c},region=${m.getRegion()},login_type=${p.login_type},user_id=${p.user_id}`,
+          `connect login server,ip=${u},port=${c},region=${m.getRegion()},login_type=${p.login_type},user_id=${p.user_id}`,//m.getRegion()的值为"china"
         ),
         A(!1),
         b.connect(c, u),//连接登录服务器，获取到登录凭据信息
@@ -89,7 +89,7 @@ function (e, t, r) {
             a(
               headerBuffer,
               bodyBuffer,
-            );//解析并构造登录session
+            );//解析并构造LoginInfo，实际调用的是项目中的reversing_code/gate tcp服务器连接相关.js中的function V
             console.warn("headerBuffer",headerBuffer);
             console.warn("bodyBuffer",bodyBuffer);
             let e = f - i;
@@ -112,7 +112,7 @@ function (e, t, r) {
         "function" == typeof e && e();
     }
     static user_id() {
-      return p.user_id;//获取登录的用户id
+      return p.user_id;//获取登录的用户id,在项目中的wanmei_tcp/wanmei_client/protocol/message.py中LoginInfo类下的user_id有实现
     }
     static send_message(e, t) {
       if (p.login_suc) return R(e, t);
@@ -269,19 +269,4 @@ function (e, t, r) {
     } else b.write(r);
   }
   e.exports = I;
-},
-function (e, t, r) {
-  "use strict";
-  Object.defineProperty(t, "__esModule", { value: !0 }),
-    (t.checkBucketName = void 0),
-    (t.checkBucketName = (e, t = !1) => {
-      if (
-        !(
-          t
-            ? /^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$/
-            : /^[a-z0-9_][a-z0-9-_]{1,61}[a-z0-9_]$/
-        ).test(e)
-      )
-        throw new Error("The bucket must be conform to the specifications");
-    });
 },

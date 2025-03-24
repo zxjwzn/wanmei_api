@@ -87,14 +87,14 @@ function (e, t, r) {
             _.destroyClient(!1);
         }
       }
-      function V(e, t) {
+      function V(e, t) {//实际上是tcp服务器连接相关.js中
         let r = new a();
         switch (
           (r.deserialize(e),
           x.trace("recv login server msg_type:" + r.type),
           r.type)
         ) {
-          case o.MessageType.MT_HELLO_NOTIFY:
+          case o.MessageType.MT_HELLO_NOTIFY://实际值为12
             {
               x.trace("recv login hello notify");
               const e = s.deserializeBinary(t, o.HelloNotify);

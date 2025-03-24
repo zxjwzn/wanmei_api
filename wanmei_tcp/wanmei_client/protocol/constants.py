@@ -1,6 +1,6 @@
 from enum import IntEnum
 
-class RoomProtocol:
+class LaaderProtocol:
     class MessageType(IntEnum):
         MT_BEGIN_NUMBER = 9001
         MT_CREATE_TEAM_REQ = 9002
@@ -494,7 +494,7 @@ class RoomProtocol:
         FILTER = 9
         AUTO_CHESS = 10
 
-class TCPProtocol:
+class GATETCPProtocol:
     class MessageType(IntEnum):
         MT_BEGIN_NUMBER = 10
         MT_HELLO_REQ = 10
